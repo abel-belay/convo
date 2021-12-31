@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 // THIS SHOULD BE GRABBED FROM .ENV FILE.
 const dbUrl = "mongodb://localhost:27017/convo";
@@ -11,8 +11,7 @@ const mongooseLoader = async () => {
     });
     console.log("Connection Open!");
   } catch (error) {
-    console.log("Uh oh! An error occured!");
-    console.log(error);
+    console.log("Uh oh! An error occured!", error);
   }
 };
 
