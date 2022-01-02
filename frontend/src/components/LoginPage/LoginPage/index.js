@@ -1,9 +1,12 @@
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../../store/userContext";
 import { Card } from "./loginPageElements";
 import UserForm from "../../UI/UserForm";
 import PageWrapper from "../../UI/PageWrapper";
-import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+  const userContext = useContext(UserContext);
   const navigate = useNavigate();
 
   const formSubmitHandler = async (e) => {
@@ -19,12 +22,15 @@ const LoginPage = () => {
         password: e.target.password.value,
       }),
     };
-    const res = await fetch("http://localhost:8000/users/login", requestOptions);
+    const res = await fetch(
+      "http://localhost:8000/users/login",
+      requestOptions
+    );
     if (res.status === 200) {
       const result = await res.json();
+      userContext.setUser(result);
       navigate("/convos");
-    }
-    else {
+    } else {
       console.log("Login failed!");
     }
   };

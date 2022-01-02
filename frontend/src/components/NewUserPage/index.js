@@ -16,7 +16,7 @@ const NewUserPage = () => {
         password: e.target.password.value,
       }),
     };
-    await fetch("http://localhost:8000/users/new", requestOptions);
+    await fetch("http://localhost:8000/users", requestOptions);
   };
 
   return (
