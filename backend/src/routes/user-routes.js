@@ -8,7 +8,8 @@ router.route("/")
   .get(showUsers)
   .post(createUser)
 
+
 router.route("/login")
-  .post(passport.authenticate("local"),loginUser)
+  .post(passport.authenticate("jwt", {session: false}),loginUser)
 
 export default router;

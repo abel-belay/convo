@@ -1,6 +1,7 @@
 import { Card } from "./newUserPageElements";
 import UserForm from "../UI/UserForm";
 import PageWrapper from "../UI/PageWrapper";
+import Cookies from "js-cookie";
 
 const NewUserPage = () => {
   const formSubmitHandler = async (e) => {
@@ -16,7 +17,13 @@ const NewUserPage = () => {
         password: e.target.password.value,
       }),
     };
-    await fetch("http://localhost:8000/users", requestOptions);
+    try {
+      const res = await fetch("http://localhost:8000/users", requestOptions);
+      const token = await res.json();
+      Cookies.set("jwt", token.token);
+    } catch (err) {
+      console.log("User registration error occured", err);
+    }
   };
 
   return (

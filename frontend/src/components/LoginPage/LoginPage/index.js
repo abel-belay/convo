@@ -4,6 +4,7 @@ import UserContext from "../../../store/userContext";
 import { Card } from "./loginPageElements";
 import UserForm from "../../UI/UserForm";
 import PageWrapper from "../../UI/PageWrapper";
+import axios from "axios";
 
 const LoginPage = () => {
   const userContext = useContext(UserContext);
@@ -12,20 +13,13 @@ const LoginPage = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }),
-    };
-    const res = await fetch(
-      "http://localhost:8000/users/login",
-      requestOptions
-    );
+    const res = await axios.post("http://localhost:8000/users/login", {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    }, {withCredentials: true});
+
+    console.log(res);
+
     if (res.status === 200) {
       const result = await res.json();
       userContext.setUser(result);

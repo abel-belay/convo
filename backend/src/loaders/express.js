@@ -3,10 +3,9 @@ const app = express();
 import session from "express-session";
 import dotenv from "dotenv";
 dotenv.config();
-import passport from "passport";
-import LocalStrategy from "passport-local";
-import User from "../models/user.js";
+import passportLoader from "./passport.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 import userRoutes from "../routes/user-routes.js";
 
@@ -18,7 +17,11 @@ const expressLoader = async () => {
   });
 
   // SET UP CORS.
-  app.use(cors());
+  const corsOptions = {
+    origin: true,
+    credentials: true,
+  }
+  app.use(cors(corsOptions));
 
   // SET UP EXPRESS SESSIONS.
   const sessionOptions = {
@@ -28,17 +31,14 @@ const expressLoader = async () => {
   };
   app.use(session(sessionOptions));
 
-  // SET UP PASSPORT AND CONFIGURE LOCAL AUTHENTICATION AS AUTHENTICATION STRATEGY.
-  app.use(passport.initialize());
-  app.use(passport.session());
-  passport.use(new LocalStrategy(User.authenticate()));
-
-  // CONFIGURE USER SERILIZATION AND DESERIALIZATION (STORING AND REMOVING USER SESSION).
-  passport.serializeUser(User.serializeUser());
-  passport.deserializeUser(User.deserializeUser());
-
   // SET EXPRESS API TO PARSE JSON DATA.
   app.use(express.json());
+
+  // SET UP COOKIE PARSER
+  app.use(cookieParser());
+
+  // SETS UP PASSPORT AS AUTHENTICATION MIDDLEWARE.
+  passportLoader(app);
 
   // EXPRESS ROUTES
   app.use("/users", userRoutes);
