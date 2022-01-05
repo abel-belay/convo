@@ -5,11 +5,11 @@ import passport from "passport";
 import { showUsers, createUser, loginUser } from "../controllers/user-controller.js";
 
 router.route("/")
-  .get(showUsers)
+  .get(passport.authenticate("jwt", {session: false}), showUsers)
   .post(createUser)
 
 
 router.route("/login")
-  .post(passport.authenticate("jwt", {session: false}),loginUser)
+  .post(loginUser)
 
 export default router;

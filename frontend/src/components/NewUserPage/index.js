@@ -1,26 +1,27 @@
+import axios from "axios";
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import UserContext from "../../store/userContext";
 import { Card } from "./newUserPageElements";
 import UserForm from "../UI/UserForm";
 import PageWrapper from "../UI/PageWrapper";
 import Cookies from "js-cookie";
 
 const NewUserPage = () => {
+  const userContext = useContext(UserContext);
+  const navigate = useNavigate();
+
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+    try {
+      let res = await axios.post("http://localhost:8000/users", {
         username: e.target.username.value,
         password: e.target.password.value,
-      }),
-    };
-    try {
-      const res = await fetch("http://localhost:8000/users", requestOptions);
-      const token = await res.json();
-      Cookies.set("jwt", token.token);
+      }, {withCredentials: true});
+      Cookies.set("jwt", res.data.token);
+      userContext.setUser(res.data.user);
+      navigate("/convos");
     } catch (err) {
       console.log("User registration error occured", err);
     }

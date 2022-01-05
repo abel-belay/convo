@@ -5,6 +5,7 @@ import { Card } from "./loginPageElements";
 import UserForm from "../../UI/UserForm";
 import PageWrapper from "../../UI/PageWrapper";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const LoginPage = () => {
   const userContext = useContext(UserContext);
@@ -18,11 +19,10 @@ const LoginPage = () => {
       password: e.target.password.value,
     }, {withCredentials: true});
 
-    console.log(res);
-
     if (res.status === 200) {
-      const result = await res.json();
-      userContext.setUser(result);
+      console.log(res.data)
+      Cookies.set("jwt", res.data.jwt);
+      userContext.setUser(res.data.user);
       navigate("/convos");
     } else {
       console.log("Login failed!");

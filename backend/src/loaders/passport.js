@@ -11,7 +11,6 @@ const passportLoader = async (app) => {
   // FUNCTION TO EXTRACT JWT VIA HTTP REQUEST COOKIE.
   const cookieExtractor = (req) => {
     let token = null;
-    console.log(req.cookies);
     if (req && req.cookies) {
       token = req.cookies.jwt;
     }

@@ -14,14 +14,25 @@ export const createUser = async (req, res) => {
     const hash = await bcrypt.hash(password, 12);
     const user = new User({ username, password: hash });
     await user.save();
-    const token = issueJwt(user);
-    res.send(JSON.stringify({token}));
+    const jwt = issueJwt(user);
+    res.send({jwt, user});
   } catch (e) {
     res.send({error: "User creation failed!"});
   }
 };
 
 export const loginUser = async (req, res) => {
-  console.log("Authenticated!");
-  res.send(req.user);
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({ username });
+    if (user && bcrypt.compare(password, user.password)) {
+      const jwt = issueJwt(user);
+      res.send(JSON.stringify({jwt, user}));
+    } else {
+      res.status(401);
+      res.send({error: "Login failed!"});
+    }
+  } catch (e) {
+    res.send({error: "User login failed!"});
+  }
 };
