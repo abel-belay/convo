@@ -6,17 +6,21 @@ const messageSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
-  time: {
+  timestamp: {
     type: Date,
     required: true,
   },
-  text: {
+  message: {
     type: String,
     required: true,
   },
 });
 
 const conversationSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   users: [
     {
       type: Schema.Types.ObjectId,

@@ -8,6 +8,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import userRoutes from "../routes/user-routes.js";
+import conversationRoutes from "../routes/conversation-routes.js";
 
 const expressLoader = async () => {
   const port = process.env.PORT;
@@ -41,6 +42,8 @@ const expressLoader = async () => {
   passportLoader(app);
 
   // EXPRESS ROUTES
+  app.use("/users/:userId/conversations", conversationRoutes);
+  
   app.use("/users", userRoutes);
 };
 

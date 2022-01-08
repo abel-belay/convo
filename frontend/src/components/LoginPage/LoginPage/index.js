@@ -20,7 +20,6 @@ const LoginPage = () => {
     }, {withCredentials: true});
 
     if (res.status === 200) {
-      console.log(res.data)
       Cookies.set("jwt", res.data.jwt);
       userContext.setUser(res.data.user);
       navigate("/convos");

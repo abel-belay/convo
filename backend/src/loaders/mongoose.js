@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+dotenv.config();
 
 // THIS SHOULD BE GRABBED FROM .ENV FILE.
-const dbUrl = "mongodb://localhost:27017/convo";
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/convo";
 
 const mongooseLoader = async () => {
   try {

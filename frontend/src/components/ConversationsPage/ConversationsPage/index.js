@@ -1,20 +1,15 @@
 import { useContext } from "react";
 import UserContext from "../../../store/userContext";
+import ConversationsList from "../ConversationsList";
 
 const ConversationsPage = () => {
   const userContext = useContext(UserContext);
-  const user = userContext.user;
-  
-  const messageElements = user.conversations.map((conversation) => (<li>{conversation.message}</li>));
 
   return (
-    <div>
-      <h1>Conversations Page</h1>
+    <div style={{backgroundColor: "gainsboro", width: "100vw", height: "100vh", margin: "0", padding: "0"}}>
+      <h1 style={{margin: "0"}}>Conversations Page</h1>
       <h2>Your Username is {userContext.user.username}</h2>
-      <ul>
-        {messageElements}
-      </ul>
-      {JSON.stringify(user)}
+      <ConversationsList />
     </div>
   );
 };
