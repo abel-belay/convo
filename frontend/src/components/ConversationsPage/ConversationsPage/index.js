@@ -1,16 +1,31 @@
-import { useContext } from "react";
-import UserContext from "../../../store/userContext";
+import {
+  PageWrapper,
+  ContentWrapper,
+  SidebarWrapper,
+  MainWrapper,
+} from "./ConversationsPageElements";
 import ConversationsList from "../ConversationsList";
+import Header from "../Header";
+import ConversationSearch from "../ConversationSearch";
+import Conversation from "../Conversation";
+import MessageForm from "../MessageForm";
 
 const ConversationsPage = () => {
-  const userContext = useContext(UserContext);
-
   return (
-    <div style={{backgroundColor: "gainsboro", width: "100vw", height: "100vh", margin: "0", padding: "0"}}>
-      <h1 style={{margin: "0"}}>Conversations Page</h1>
-      <h2>Your Username is {userContext.user.username}</h2>
-      <ConversationsList />
-    </div>
+    <PageWrapper>
+      <ContentWrapper>
+        <SidebarWrapper>
+          <Header />
+          <ConversationSearch />
+          <ConversationsList />
+        </SidebarWrapper>
+        <MainWrapper>
+          <Header />
+          <Conversation />
+          <MessageForm />
+        </MainWrapper>
+      </ContentWrapper>
+    </PageWrapper>
   );
 };
 

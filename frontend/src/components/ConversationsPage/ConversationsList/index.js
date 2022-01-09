@@ -23,35 +23,104 @@ const ConversationsList = () => {
 
   const loadConverationPreviewComponents = () => {
     return conversations.map((conversation) => (
-      <li>
-        <ConversationPreview
-          key={conversation._id}
-          conversation={conversation}
-        />
+      <li key={conversation._id}>
+        <ConversationPreview conversation={conversation} />
       </li>
     ));
   };
 
   return (
     <Wrapper>
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
-      {conversations ? <ul>{loadConverationPreviewComponents()}</ul> : "Loading"}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
+      {conversations ? (
+        <ul>{loadConverationPreviewComponents()}</ul>
+      ) : (
+        "Loading"
+      )}
     </Wrapper>
   );
 };

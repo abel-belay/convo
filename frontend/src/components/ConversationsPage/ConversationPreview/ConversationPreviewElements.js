@@ -24,7 +24,7 @@ export const Wrapper = styled.button`
 export const ContentWrapper = styled.div`
   width: 100%;
   margin-left: 0.5rem;
-  padding: 1rem 0.6rem 1rem 0;
+  padding: 1rem 0.75rem 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
