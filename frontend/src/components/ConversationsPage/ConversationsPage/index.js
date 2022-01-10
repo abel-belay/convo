@@ -1,3 +1,4 @@
+import { SelectedConversationContextProvider } from "../../../store/selectedConversationContext";
 import {
   PageWrapper,
   ContentWrapper,
@@ -14,16 +15,18 @@ const ConversationsPage = () => {
   return (
     <PageWrapper>
       <ContentWrapper>
-        <SidebarWrapper>
-          <Header />
-          <ConversationSearch />
-          <ConversationsList />
-        </SidebarWrapper>
-        <MainWrapper>
-          <Header />
-          <Conversation />
-          <MessageForm />
-        </MainWrapper>
+        <SelectedConversationContextProvider>
+          <SidebarWrapper>
+            <Header />
+            <ConversationSearch />
+            <ConversationsList />
+          </SidebarWrapper>
+          <MainWrapper>
+            <Header />
+            <Conversation />
+            <MessageForm />
+          </MainWrapper>
+        </SelectedConversationContextProvider>
       </ContentWrapper>
     </PageWrapper>
   );

@@ -1,12 +1,23 @@
+import { useContext } from "react";
+import SelectedConversationContext from "../../../store/selectedConversationContext";
 import { ConversationWrapper } from "./ConversationElements";
 
 const Conversation = () => {
-  const test = Array.from(Array(500)).map((element, i) => <p key={i}>Conversation Message.</p>)
+  const selectedConversationContext = useContext(SelectedConversationContext);
+  const { selectedConversation } = selectedConversationContext;
+
+  let conversationBody;
+  if (selectedConversation) {
+    conversationBody = selectedConversation.messages.map((message, i) => (
+      <p key={i}>{message.user.username + ": " + message.message}</p>
+    ));
+  } else {
+    conversationBody = "Please select a conversation.";
+  }
+
   return (
     <ConversationWrapper>
-      <p>First message.</p>
-      {test}
-      <p>Last message.</p>
+      {conversationBody}
     </ConversationWrapper>
   );
 };
