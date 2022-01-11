@@ -4,7 +4,7 @@ export const PageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #e6e6e6;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Inter", sans-serif;
   overflow-y: hidden;
 `;
 

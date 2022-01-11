@@ -1,9 +1,7 @@
 import { HeaderWrapper } from "./HeaderElements";
 
-const Header = () => {
-  return (
-    <HeaderWrapper></HeaderWrapper>
-  )
-}
+const Header = (props) => {
+  return <HeaderWrapper>{props.children}</HeaderWrapper>;
+};
 
 export default Header;

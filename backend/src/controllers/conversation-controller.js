@@ -15,3 +15,8 @@ export const showConversations = async (req, res) => {
   });
   res.send(user.conversations);
 };
+
+export const addMessage = async (req, res) => {
+  console.log(req.body.message);
+  res.send(req.body.message);
+};

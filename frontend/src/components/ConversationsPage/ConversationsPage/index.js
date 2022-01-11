@@ -7,6 +7,7 @@ import {
 } from "./ConversationsPageElements";
 import ConversationsList from "../ConversationsList";
 import Header from "../Header";
+import ConversationHeader from "../ConversationHeader";
 import ConversationSearch from "../ConversationSearch";
 import Conversation from "../Conversation";
 import MessageForm from "../MessageForm";
@@ -22,7 +23,7 @@ const ConversationsPage = () => {
             <ConversationsList />
           </SidebarWrapper>
           <MainWrapper>
-            <Header />
+            <ConversationHeader />
             <Conversation />
             <MessageForm />
           </MainWrapper>
