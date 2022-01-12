@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
 import UserContext from "../../../store/userContext";
 import { MessageFormWrapper } from "./MessageFormElements";
@@ -7,10 +7,14 @@ import { MessageFormWrapper } from "./MessageFormElements";
 const MessageForm = () => {
   const selectedConversationContext = useContext(SelectedConversationContext);
   const userContext = useContext(UserContext);
+  const textareaRef = useRef();
 
-  const inputChangeHandler = (e) => {
-    e.target.style.height = "inherit";
-    e.target.style.height = `${Math.min(e.target.scrollHeight, 350)}px`;
+  const inputChangeHandler = () => {
+    textareaRef.current.style.height = "inherit";
+    textareaRef.current.style.height = `${Math.min(
+      textareaRef.current.scrollHeight,
+      350
+    )}px`;
   };
 
   const formSubmitHandler = async (e) => {
@@ -19,10 +23,24 @@ const MessageForm = () => {
     const userId = userContext.user._id;
     const res = await axios.post(
       `http://localhost:8000/users/${userId}/conversations/${conversationId}/messages`,
-      { message: e.target.message.value },
+      { message: textareaRef.current.value },
       { withCredentials: true }
     );
-    console.log(res.data);
+
+    // ADD RETURNED MESSAGE (INCLUDES USER AND TIMESTAMP) TO SELECTED CONVERSATION CONTEXT (IF MESSAGE WAS SUCCESSFULLY ADD TO THE DATABASE);
+    if (res.status !== 500) {
+      selectedConversationContext.setSelectedConversation((prevState) => {
+        return {
+          ...prevState,
+          messages: prevState.messages.concat([res.data.message]),
+          scrollBehavior: "smooth",
+        };
+      });
+
+      // CLEAR TEXTAREA INPUT AND RESIZE TEXTAREA.
+      textareaRef.current.value = "";
+      inputChangeHandler();
+    }
   };
 
   return (
@@ -33,6 +51,7 @@ const MessageForm = () => {
           id=""
           rows="1"
           placeholder="Send a message."
+          ref={textareaRef}
           onChange={inputChangeHandler}
         ></textarea>
         <button>&#8593;</button>

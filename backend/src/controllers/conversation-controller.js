@@ -17,6 +17,18 @@ export const showConversations = async (req, res) => {
 };
 
 export const addMessage = async (req, res) => {
-  console.log(req.body.message);
-  res.send(req.body.message);
+  try {
+    const {conversationId, userId} = req.params;
+    const message = req.body.message;
+    const user = await User.findById(userId);
+    const conversation = await Conversation.findById(conversationId);
+    console.log(conversation.messages);
+    const messageData = {user, message, timestamp: Date.now()};
+    conversation.messages.push(messageData);
+    await conversation.save();
+    res.send({message: messageData});
+  } catch (e) {
+    res.status(500);
+    res.send("Failed to add message!");
+  }
 };

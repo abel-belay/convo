@@ -44,9 +44,12 @@ conversationSchema.post("findOneAndDelete", async function (conversation) {
 });
 
 conversationSchema.post("save", async function (conversation) {
+  await conversation.populate("users");
   if (conversation) {
+    // ADD CONVERSATION REFERENCE TO USERS IN THE CONVERSATION IF THEY DON'T ALREADY HAVE IT ADDED.
     const users = await conversation.users;
     for (let user of users) {
+      if (!user.conversations.includes(conversation.id))
       user.conversations.push(conversation);
       await user.save();
     }

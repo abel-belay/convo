@@ -24,7 +24,7 @@ const ConversationPreview = (props) => {
   };
 
   const previewClickHandler = () => {
-    selectedConversationContext.setSelectedConversation(props.conversation);
+    selectedConversationContext.setSelectedConversation({...props.conversation, scrollBehavior: "auto"});
   };
 
   return (

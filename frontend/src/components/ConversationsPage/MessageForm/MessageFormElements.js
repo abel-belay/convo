@@ -14,12 +14,13 @@ export const MessageFormWrapper = styled.div`
 
     & > textarea {
       flex-grow: 1;
-      padding: 0.5rem 0 0.5rem 2rem;
+      padding: 0.5rem 1.5rem;
       display: flex;
       align-items: center;
       border-radius: 1rem;
       font-family: "Inter", sans-serif;
       font-size: 1rem;
+      line-height: 1.4rem;
       resize: none;
     }
 

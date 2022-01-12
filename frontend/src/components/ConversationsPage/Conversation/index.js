@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
 import UserContext from "../../../store/userContext";
 import {
@@ -8,19 +8,29 @@ import {
   MessageRight,
 } from "./ConversationElements";
 
+// WILL BE SCROLLED INTO VIEW WHENEVER PARENT COMPONENT IS RE-RENDERED.
+// WE'RE PUTTING THIS AT THE BOTTOM OF THE COVNERSATION COMPONENT.
+const AlwaysScrollToBottom = () => {
+  const elementRef = useRef();
+  useEffect(() => elementRef.current.scrollIntoView());
+  return <div ref={elementRef} />;
+};
+
 const Conversation = () => {
   const selectedConversationContext = useContext(SelectedConversationContext);
   const { selectedConversation } = selectedConversationContext;
 
   const userContext = useContext(UserContext);
 
-  let conversationBody;
-  if (selectedConversation) {
-    conversationBody = selectedConversation.messages.map((message, i) => {
+  const formatConversation = (conversation) => {
+    const messageComponents = conversation.messages.map((message, i) => {
       // MAKE BOOLEAN TO REMOVE MARGIN BETWEEN SUBSEQUENT MESSAGES FROM THE SAME USER.
-      let topMargin = true;
-      if (i > 0 && message.user._id === selectedConversation.messages[i - 1].user._id) {
-        topMargin = false;
+      let topMargin = false;
+      if (
+        i > 0 &&
+        message.user._id !== selectedConversation.messages[i - 1].user._id
+      ) {
+        topMargin = true;
       }
 
       // RENDER MESSAGES FROM USER ON RIGHT, MESSAGES FROM OTHERS ON LEFT.
@@ -38,13 +48,23 @@ const Conversation = () => {
         );
       }
     });
+
+    return messageComponents;
+  };
+
+  let conversationBody;
+  if (selectedConversation) {
+    conversationBody = formatConversation(selectedConversation);
   } else {
     conversationBody = "Please select a conversation.";
   }
 
   return (
     <ConversationWrapper>
-      <ContentWrapper>{conversationBody}</ContentWrapper>
+      <ContentWrapper scrollBehavior={selectedConversationContext.selectedConversation && selectedConversationContext.selectedConversation.scrollBehavior}>
+        {conversationBody}
+        <AlwaysScrollToBottom />
+      </ContentWrapper>
     </ConversationWrapper>
   );
 };

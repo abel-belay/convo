@@ -9,11 +9,13 @@ export const ConversationWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-  width: 95%;
-  height: 95%;
+  width: 98%;
+  height: 100%;
+  padding: 2%;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  scroll-behavior: ${props => props.scrollBehavior === "auto" ? "auto" : "smooth"};
 `;
 
 const Message = styled.div`
@@ -22,6 +24,7 @@ const Message = styled.div`
   padding: 0.5rem;
   display: inline-block;
   border-radius: 0.8rem;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.5);
   color: white;
 
   & > p {
