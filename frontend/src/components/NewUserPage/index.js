@@ -15,7 +15,7 @@ const NewUserPage = () => {
     e.preventDefault();
 
     try {
-      let res = await axios.post("http://localhost:8000/users", {
+      let res = await axios.post("/api/users", {
         username: e.target.username.value,
         password: e.target.password.value,
         image: e.target.image.value,

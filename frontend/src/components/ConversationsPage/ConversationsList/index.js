@@ -13,7 +13,7 @@ const ConversationsList = () => {
   useEffect(() => {
     const getConversations = async () => {
       const res = await axios.get(
-        `http://localhost:8000/users/${user._id}/conversations`
+        `/api/users/${user._id}/conversations`
       );
       setConversations(res.data);
     };

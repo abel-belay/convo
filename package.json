@@ -1,0 +1,21 @@
+{
+  "name": "convo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/src/index.js",
+    "heroku-postbuild": "cd backend && npm install && cd ../frontend && npm install && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abel-belay/convo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abel-belay/convo/issues"
+  },
+  "homepage": "https://github.com/abel-belay/convo#readme"
+}

@@ -14,7 +14,7 @@ const LoginPage = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("http://localhost:8000/users/login", {
+    const res = await axios.post("/api/users/login", {
       username: e.target.username.value,
       password: e.target.password.value,
     }, {withCredentials: true});

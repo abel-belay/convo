@@ -22,7 +22,7 @@ const MessageForm = () => {
     const conversationId = selectedConversationContext.selectedConversation._id;
     const userId = userContext.user._id;
     const res = await axios.post(
-      `http://localhost:8000/users/${userId}/conversations/${conversationId}/messages`,
+      `/api/users/${userId}/conversations/${conversationId}/messages`,
       { message: textareaRef.current.value },
       { withCredentials: true }
     );
