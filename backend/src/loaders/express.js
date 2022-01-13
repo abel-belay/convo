@@ -6,7 +6,10 @@ dotenv.config();
 import passportLoader from "./passport.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import * as path from 'path';
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import userRoutes from "../routes/user-routes.js";
 import conversationRoutes from "../routes/conversation-routes.js";
