@@ -9,7 +9,7 @@ export const showConversations = async (req, res) => {
       path: "messages",
       populate: {
         path: "user",
-        select: "username",
+        select: ["username", "image"]
       },
     },
   });
@@ -22,7 +22,6 @@ export const addMessage = async (req, res) => {
     const message = req.body.message;
     const user = await User.findById(userId);
     const conversation = await Conversation.findById(conversationId);
-    console.log(conversation.messages);
     const messageData = {user, message, timestamp: Date.now()};
     conversation.messages.push(messageData);
     await conversation.save();

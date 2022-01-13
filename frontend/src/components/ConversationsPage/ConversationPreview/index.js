@@ -24,15 +24,23 @@ const ConversationPreview = (props) => {
   };
 
   const previewClickHandler = () => {
-    selectedConversationContext.setSelectedConversation({...props.conversation, scrollBehavior: "auto"});
+    selectedConversationContext.setSelectedConversation({
+      ...props.conversation,
+      scrollBehavior: "auto",
+    });
+  };
+
+  const findRightPic = (messages) => {
+    for (let i = messages.length - 1; i >= 0; --i) {
+      if (messages[i].user._id !== user._id) {
+        return messages[i].user.image;
+      }
+    }
   };
 
   return (
     <Wrapper onClick={previewClickHandler}>
-      <img
-        src="https://images.unsplash.com/photo-1558624232-75ee22af7e67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
-        alt="User's profile."
-      />
+      <img src={findRightPic(conversation.messages)} alt="User's profile." />
       <ContentWrapper>
         <TextWrapper>
           <h4>{conversation.name}</h4>

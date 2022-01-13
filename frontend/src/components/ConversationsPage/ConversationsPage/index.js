@@ -5,12 +5,12 @@ import {
   SidebarWrapper,
   MainWrapper,
 } from "./ConversationsPageElements";
-import ConversationsList from "../ConversationsList";
-import Header from "../Header";
 import ConversationHeader from "../ConversationHeader";
-import ConversationSearch from "../ConversationSearch";
 import Conversation from "../Conversation";
 import MessageForm from "../MessageForm";
+import ConversationsListHeader from "../ConversationsListHeader";
+import ConversationsList from "../ConversationsList";
+import ConversationSearch from "../ConversationSearch";
 
 const ConversationsPage = () => {
   return (
@@ -18,7 +18,7 @@ const ConversationsPage = () => {
       <ContentWrapper>
         <SelectedConversationContextProvider>
           <SidebarWrapper>
-            <Header />
+            <ConversationsListHeader />
             <ConversationSearch />
             <ConversationsList />
           </SidebarWrapper>

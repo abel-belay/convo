@@ -10,13 +10,14 @@ export const showUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, image } = req.body;
     const hash = await bcrypt.hash(password, 12);
-    const user = new User({ username, password: hash });
+    const user = new User({ username, password: hash, image });
     await user.save();
     const jwt = issueJwt(user);
     res.send({jwt, user});
   } catch (e) {
+    res.status(500);
     res.send({error: "User creation failed!"});
   }
 };

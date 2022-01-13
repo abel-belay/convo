@@ -20,7 +20,7 @@ export const MessageFormWrapper = styled.div`
       border-radius: 1rem;
       font-family: "Inter", sans-serif;
       font-size: 1rem;
-      line-height: 1.4rem;
+      line-height: 1.3rem;
       resize: none;
     }
 

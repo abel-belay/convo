@@ -12,7 +12,7 @@ const MessageForm = () => {
   const inputChangeHandler = () => {
     textareaRef.current.style.height = "inherit";
     textareaRef.current.style.height = `${Math.min(
-      textareaRef.current.scrollHeight,
+      textareaRef.current.scrollHeight + 2,
       350
     )}px`;
   };
@@ -48,7 +48,6 @@ const MessageForm = () => {
       <form onSubmit={formSubmitHandler}>
         <textarea
           name="message"
-          id=""
           rows="1"
           placeholder="Send a message."
           ref={textareaRef}

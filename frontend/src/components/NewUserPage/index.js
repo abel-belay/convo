@@ -18,6 +18,7 @@ const NewUserPage = () => {
       let res = await axios.post("http://localhost:8000/users", {
         username: e.target.username.value,
         password: e.target.password.value,
+        image: e.target.image.value,
       }, {withCredentials: true});
       Cookies.set("jwt", res.data.token);
       userContext.setUser(res.data.user);
