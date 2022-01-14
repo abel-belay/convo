@@ -23,7 +23,7 @@ export const SidebarWrapper = styled.div`
 
 export const MainWrapper = styled.div`
   height: 100%;
-  flex-grow: 1;
+  width: 67%;
   display: flex;
   flex-direction: column;
   background-color: #E6E6E6;
