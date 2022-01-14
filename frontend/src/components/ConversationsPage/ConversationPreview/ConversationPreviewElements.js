@@ -5,7 +5,7 @@ export const Wrapper = styled.button`
   padding: 0;
   display: flex;
   align-items: center;
-  background-color: transparent;
+  background-color: ${(props) => (props.isSelected ? "rgba(0, 0, 0, 0.04)" : "transparent")};
   border: none;
   text-align: left;
   transition: 0.3s;
@@ -28,7 +28,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #E5E5E5;
 `;
 
 export const TextWrapper = styled.div`

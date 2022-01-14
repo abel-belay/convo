@@ -25,7 +25,8 @@ export const addMessage = async (req, res) => {
     const messageData = {user, message, timestamp: Date.now()};
     conversation.messages.push(messageData);
     await conversation.save();
-    res.send({message: messageData});
+    const messageRes = conversation.messages[conversation.messages.length - 1];
+    res.send({message: messageRes});
   } catch (e) {
     res.status(500);
     res.send("Failed to add message!");

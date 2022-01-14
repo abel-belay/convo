@@ -5,23 +5,24 @@ import { ConversationWrapper, ContentWrapper } from "./ConversationElements";
 import Message from "../Message";
 
 // WILL BE SCROLLED INTO VIEW WHENEVER PARENT COMPONENT IS RE-RENDERED.
-// WE'RE PUTTING THIS AT THE BOTTOM OF THE COVNERSATION COMPONENT.
+// WE'RE PUTTING THIS IMMEDIATELY BELOW COVNERSATION COMPONENT.
 const AlwaysScrollToBottom = () => {
   const elementRef = useRef();
   useEffect(() => elementRef.current.scrollIntoView());
   return <div ref={elementRef} />;
 };
 
-const formatConversation = (conversation, userContext) => {
-  return conversation.messages.map((message, i) => (
+const formatConversation = (conversation, userContext) =>
+  conversation.messages.map((message, i) => (
     <Message
       key={message._id}
       message={message}
       isOtherUser={message.user._id !== userContext.user._id}
-      isMarginTop={i > 0 && message.user._id !== conversation.messages[i - 1].user._id}
+      isMarginTop={
+        i > 0 && message.user._id !== conversation.messages[i - 1].user._id
+      }
     />
   ));
-};
 
 const Conversation = () => {
   const userContext = useContext(UserContext);
