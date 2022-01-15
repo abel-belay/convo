@@ -133,6 +133,30 @@ table {
 
 /* END OF CSS RESET */
 
-/* body {
-  overflow-y: hidden;
-} */
+body {
+  overflow: hidden;
+}
+
+/* SHOW/HIDE CONVERSATIONS LIST ANIMATION */
+@media (max-width: 768px) {
+  .conversationsList-enter {
+    transform: translateX(-100%) !important;
+  }
+  .conversationsList-enter-active {
+    transform: translateX(0) !important;
+    transition: transform linear 200ms;
+  }
+  .conversationsList-enter-done {
+    transform: translateX(0) !important;
+  }
+  .conversationsList-exit {
+    transform: translateX(0) !important;
+  }
+  .conversationsList-exit-active {
+    transform: translateX(-100%) !important;
+    transition: transform linear 200ms;
+  }
+  .conversationsList-exit-done {
+    transform: translateX(-100%) !important;
+  }
+}

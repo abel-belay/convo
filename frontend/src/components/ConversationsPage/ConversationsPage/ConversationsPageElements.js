@@ -19,6 +19,11 @@ export const SidebarWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    position: absolute;
+  }
 `;
 
 export const MainWrapper = styled.div`
@@ -27,4 +32,8 @@ export const MainWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #E6E6E6;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;

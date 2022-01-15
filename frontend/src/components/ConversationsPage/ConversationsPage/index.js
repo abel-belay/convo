@@ -1,4 +1,6 @@
-import { SelectedConversationContextProvider } from "../../../store/selectedConversationContext";
+import { useContext, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import ShowConversationContext from "../../../store/showConversationContext";
 import {
   PageWrapper,
   ContentWrapper,
@@ -13,21 +15,29 @@ import ConversationsList from "../ConversationsList";
 import ConversationSearch from "../ConversationSearch";
 
 const ConversationsPage = () => {
+  const showConversationContext = useContext(ShowConversationContext);
+  const sidebarRef = useRef();
+
   return (
     <PageWrapper>
       <ContentWrapper>
-        <SelectedConversationContextProvider>
-          <SidebarWrapper>
+        <CSSTransition
+          in={!showConversationContext.showConversation}
+          timeout={200}
+          nodeRef={sidebarRef}
+          classNames="conversationsList"
+        >
+          <SidebarWrapper ref={sidebarRef}>
             <ConversationsListHeader />
             <ConversationSearch />
             <ConversationsList />
           </SidebarWrapper>
-          <MainWrapper>
-            <ConversationHeader />
-            <Conversation />
-            <MessageForm />
-          </MainWrapper>
-        </SelectedConversationContextProvider>
+        </CSSTransition>
+        <MainWrapper>
+          <ConversationHeader />
+          <Conversation />
+          <MessageForm />
+        </MainWrapper>
       </ContentWrapper>
     </PageWrapper>
   );

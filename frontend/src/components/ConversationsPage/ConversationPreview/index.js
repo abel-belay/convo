@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useContext } from "react";
+import ShowConversationContext from "../../../store/showConversationContext";
 import UserContext from "../../../store/userContext";
 import {
   Wrapper,
@@ -28,11 +29,13 @@ const ConversationPreview = (props) => {
   const user = userContext.user;
   const conversation = props.conversation;
   const selectedConversationContext = useContext(SelectedConversationContext);
+  const showConversationContext = useContext(ShowConversationContext);
 
   const latestMessage = conversation.messages[conversation.messages.length - 1];
   latestMessage.time = dayjs().to(dayjs(latestMessage.timestamp));
 
   const previewClickHandler = () => {
+    showConversationContext.setShowConversation(true);
     selectedConversationContext.setSelectedConversation({
       ...props.conversation,
       scrollBehavior: "auto",

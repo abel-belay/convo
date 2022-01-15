@@ -4,11 +4,17 @@ import "./index.css";
 import App from "./App";
 import { UserContextProvider } from "./store/userContext";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { SelectedConversationContextProvider } from "./store/selectedConversationContext";
+import { ShowConversationContextProvider } from "./store/showConversationContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
-      <App />
+      <ShowConversationContextProvider>
+        <SelectedConversationContextProvider>
+          <App />
+        </SelectedConversationContextProvider>
+      </ShowConversationContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
   document.getElementById("root")
