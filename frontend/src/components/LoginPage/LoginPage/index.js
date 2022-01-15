@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../../store/userContext";
 import { Card } from "./loginPageElements";
@@ -14,10 +14,14 @@ const LoginPage = () => {
   const formSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const res = await axios.post("/api/users/login", {
-      username: e.target.username.value,
-      password: e.target.password.value,
-    }, {withCredentials: true});
+    const res = await axios.post(
+      "/api/users/login",
+      {
+        username: e.target.username.value,
+        password: e.target.password.value,
+      },
+      { withCredentials: true }
+    );
 
     if (res.status === 200) {
       Cookies.set("jwt", res.data.jwt);

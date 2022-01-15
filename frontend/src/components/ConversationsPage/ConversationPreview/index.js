@@ -7,6 +7,7 @@ import {
   TextWrapper,
   Time,
   ContentWrapper,
+  InnerWrapper,
 } from "./ConversationPreviewElements";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
 
@@ -39,18 +40,30 @@ const ConversationPreview = (props) => {
   };
 
   return (
-    <Wrapper onClick={previewClickHandler} isSelected={selectedConversationContext.selectedConversation && selectedConversationContext.selectedConversation._id === conversation._id}>
-      <img src={conversationPreviewPic(conversation.messages, user)} alt="User's profile." />
+    <Wrapper
+      onClick={previewClickHandler}
+      isSelected={
+        selectedConversationContext.selectedConversation &&
+        selectedConversationContext.selectedConversation._id ===
+          conversation._id
+      }
+    >
       <ContentWrapper>
-        <TextWrapper>
-          <h4>{conversation.name}</h4>
-          <p>
-            {latestMessage.user._id === user._id
-              ? "Sent"
-              : latestMessage.user.username + ": " + latestMessage.message}
-          </p>
-        </TextWrapper>
-        <Time>{latestMessage.time}</Time>
+        <img
+          src={conversationPreviewPic(conversation.messages, user)}
+          alt="User's profile."
+        />
+        <InnerWrapper>
+          <TextWrapper>
+            <h4>{conversation.name}</h4>
+            <p>
+              {latestMessage.user._id === user._id
+                ? "Sent"
+                : latestMessage.user.username + ": " + latestMessage.message}
+            </p>
+          </TextWrapper>
+          <Time>{latestMessage.time}</Time>
+        </InnerWrapper>
       </ContentWrapper>
     </Wrapper>
   );

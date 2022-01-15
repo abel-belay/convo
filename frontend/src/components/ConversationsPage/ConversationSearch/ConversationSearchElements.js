@@ -7,7 +7,7 @@ export const SearchWrapper = styled.div`
   background-color: #f8f8f8;
 
   & > form {
-    width: 90%;
+    width: 93%;
     margin: 1rem 0;
 
     & > input {

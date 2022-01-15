@@ -5,7 +5,7 @@ import { showConversations, addMessage } from "../controllers/conversation-contr
 
 router.route("/")
   // NEED TO ADD PASSPORT AUTHENTICATION TO ROUTE.
-  .get(showConversations);
+  .get(passport.authenticate("jwt", {session: false}), showConversations);
 
 router.route("/:conversationId/messages")
   .post(addMessage);
