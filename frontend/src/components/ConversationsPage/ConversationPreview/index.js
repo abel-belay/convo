@@ -18,11 +18,16 @@ import { useEffect } from "react";
 dayjs.extend(relativeTime);
 
 // GETS THE IMAGE OF THE USER WHO SENT THE MOST RECENT MESSAGE THAT IS NOT THE CLIENT.
-const conversationPreviewPic = (messages, user) => {
-  for (let i = messages.length - 1; i >= 0; --i) {
-    if (messages[i].user._id !== user._id) {
-      return messages[i].user.image;
+const conversationPreviewPic = (messages, user, conversation) => {
+  if (messages.length > 0) {
+    for (let i = messages.length - 1; i >= 0; --i) {
+      if (messages[i].user._id !== user._id) {
+        return messages[i].user.image;
+      }
     }
+  } else {
+    const otherUser = conversation.users.find((element) => element._id !== user._id);
+    return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   }
 };
 
@@ -37,8 +42,12 @@ const ConversationPreview = (props) => {
     selectedConversationContext.selectedConversation &&
     selectedConversationContext.selectedConversation._id === conversation._id;
 
-  const latestMessage = conversation.messages[conversation.messages.length - 1];
-  latestMessage.time = dayjs().to(dayjs(latestMessage.timestamp));
+  let latestMessage = null;
+  if (conversation.messages.length > 0) {
+    latestMessage =
+      conversation.messages[conversation.messages.length - 1];
+    latestMessage.time = dayjs().to(dayjs(latestMessage.timestamp));
+  }
 
   useEffect(() => {
     socket.emit("join", conversation._id);
@@ -46,25 +55,27 @@ const ConversationPreview = (props) => {
 
   // OFF IS RUN FIRST TO ENSURE ONLY ONE EVENT LISTENER FOR THE EVENT EXISTS AT A TIME.
   // BECAUSE WHEN THE CODE IS RUN MORE THAN ONCE (RE-RENDER), IT ADDS AN ADDITIONAL EVENT LISTENER.
-  socket.off(`new-message-${conversation._id}`).on(`new-message-${conversation._id}`, (data) => {
-    setConversation((prevState) => {
-      return {
-        ...prevState,
-        messages: prevState.messages.concat([data.message]),
-        scrollBehavior: "smooth",
-      };
-    });
-
-    if (isConversationSelected) {
-      selectedConversationContext.setSelectedConversation((prevState) => {
+  socket
+    .off(`new-message-${conversation._id}`)
+    .on(`new-message-${conversation._id}`, (data) => {
+      setConversation((prevState) => {
         return {
           ...prevState,
           messages: prevState.messages.concat([data.message]),
           scrollBehavior: "smooth",
         };
       });
-    }
-  });
+
+      if (isConversationSelected) {
+        selectedConversationContext.setSelectedConversation((prevState) => {
+          return {
+            ...prevState,
+            messages: prevState.messages.concat([data.message]),
+            scrollBehavior: "smooth",
+          };
+        });
+      }
+    });
 
   const previewClickHandler = () => {
     showConversationContext.setShowConversation(true);
@@ -75,25 +86,35 @@ const ConversationPreview = (props) => {
   };
 
   return (
-    <Wrapper
-      onClick={previewClickHandler}
-      isSelected={isConversationSelected}
-    >
+    <Wrapper onClick={previewClickHandler} isSelected={isConversationSelected}>
       <ContentWrapper>
         <img
-          src={conversationPreviewPic(conversation.messages, user)}
+          src={conversationPreviewPic(conversation.messages, user, conversation)}
           alt="User's profile."
         />
         <InnerWrapper>
-          <TextWrapper>
-            <h4>{conversation.name}</h4>
-            <p>
-              {latestMessage.user._id === user._id
-                ? "Sent"
-                : latestMessage.user.username + ": " + latestMessage.message}
-            </p>
-          </TextWrapper>
-          <Time>{latestMessage.time}</Time>
+          {latestMessage ? (
+            <>
+              <TextWrapper>
+                <h4>{conversation.name}</h4>
+                <p>
+                  {latestMessage.user._id === user._id
+                    ? "Sent"
+                    : latestMessage.user.username +
+                      ": " +
+                      latestMessage.message}
+                </p>
+              </TextWrapper>
+              <Time>{latestMessage.time}</Time>
+            </>
+          ) : (
+            <>
+              <TextWrapper>
+                <h4>{conversation.name}</h4>
+                <p>No Messages Sent</p>
+              </TextWrapper>
+            </>
+          )}
         </InnerWrapper>
       </ContentWrapper>
     </Wrapper>
