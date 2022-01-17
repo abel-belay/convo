@@ -12,7 +12,7 @@ import {
   InnerWrapper,
 } from "./ConversationPreviewElements";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
-import { useEffect } from "react/cjs/react.development";
+import { useEffect } from "react";
 
 // ENABLES DAYJS TO USE RELATIVE TIMES (E.G. "TWO DAYS AGO").
 dayjs.extend(relativeTime);
