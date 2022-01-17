@@ -6,10 +6,20 @@ dotenv.config();
 import passportLoader from "./passport.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
+import http from "http";
+import socketLoader from "./socket.js";
+import { Server } from "socket.io";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const server = http.createServer(app);
+
+export const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL,
+  },
+});
 
 import userRoutes from "../routes/user-routes.js";
 import conversationRoutes from "../routes/conversation-routes.js";
@@ -17,7 +27,10 @@ import conversationRoutes from "../routes/conversation-routes.js";
 const expressLoader = async () => {
   const port = process.env.PORT;
 
-  app.listen(port, () => {
+  // SETS UP SOCKET.IO
+  socketLoader();
+
+  server.listen(port, () => {
     console.log(`Serving at port ${port}`);
   });
 

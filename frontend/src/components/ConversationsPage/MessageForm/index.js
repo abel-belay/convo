@@ -29,14 +29,6 @@ const MessageForm = () => {
 
     // ADD RETURNED MESSAGE (INCLUDES USER AND TIMESTAMP) TO SELECTED CONVERSATION CONTEXT (IF MESSAGE WAS SUCCESSFULLY ADD TO THE DATABASE);
     if (res.status !== 500) {
-      selectedConversationContext.setSelectedConversation((prevState) => {
-        return {
-          ...prevState,
-          messages: prevState.messages.concat([res.data.message]),
-          scrollBehavior: "smooth",
-        };
-      });
-
       // CLEAR TEXTAREA INPUT AND RESIZE TEXTAREA.
       textareaRef.current.value = "";
       inputChangeHandler();
