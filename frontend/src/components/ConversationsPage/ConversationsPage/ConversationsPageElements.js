@@ -16,7 +16,7 @@ export const ContentWrapper = styled.div`
 
 export const SidebarWrapper = styled.div`
   width: 33%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   z-index: 10;
@@ -28,7 +28,7 @@ export const SidebarWrapper = styled.div`
 `;
 
 export const MainWrapper = styled.div`
-  height: 100%;
+  height: 100vh;
   width: 67%;
   display: flex;
   flex-direction: column;

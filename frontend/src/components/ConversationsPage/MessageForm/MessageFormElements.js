@@ -5,8 +5,6 @@ export const MessageFormWrapper = styled.div`
   display: flex;
   justify-content: center;
   background-color: #f8f8f8;
-  position: fixed;
-  bottom: 0;
 
   & > form {
     width: 90%;
