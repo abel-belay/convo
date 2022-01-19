@@ -26,9 +26,7 @@ const conversationPreviewPic = (messages, user, conversation) => {
       }
     }
   } else {
-    const otherUser = conversation.users.find(
-      (element) => element._id !== user._id
-    );
+    const otherUser = conversation.users.find((element) => element._id !== user._id);
     return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   }
 };
@@ -46,17 +44,13 @@ const ConversationPreview = (props) => {
 
   let latestMessage = null;
   if (conversation.messages.length > 0) {
-    latestMessage = conversation.messages[conversation.messages.length - 1];
+    latestMessage =
+      conversation.messages[conversation.messages.length - 1];
     latestMessage.time = dayjs().to(dayjs(latestMessage.timestamp));
   }
 
-  // JOIN ROOMS ON INTIAL CONNECT AND SUBSEQUENT CONNECTIONS.
-  // RECONNECTS MAINLY OCCUR WHEN MOBILE APPS ARE PUT IN BACKGROUND AND THEN ARE REOPENED.
   useEffect(() => {
     socket.emit("join", conversation._id);
-    socket.on("connect", () => {
-      socket.emit("join", conversation._id);
-    });
   }, [conversation._id]);
 
   // OFF IS RUN FIRST TO ENSURE ONLY ONE EVENT LISTENER FOR THE EVENT EXISTS AT A TIME.
@@ -95,11 +89,7 @@ const ConversationPreview = (props) => {
     <Wrapper onClick={previewClickHandler} isSelected={isConversationSelected}>
       <ContentWrapper>
         <img
-          src={conversationPreviewPic(
-            conversation.messages,
-            user,
-            conversation
-          )}
+          src={conversationPreviewPic(conversation.messages, user, conversation)}
           alt="User's profile."
         />
         <InnerWrapper>
