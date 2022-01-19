@@ -4,9 +4,9 @@ export const MessageFormWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  position: -webkit-sticky;
-  position: sticky;
   background-color: #f8f8f8;
+  position: fixed;
+  bottom: 0;
 
   & > form {
     width: 90%;

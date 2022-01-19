@@ -30,8 +30,6 @@ export const SidebarWrapper = styled.div`
 export const MainWrapper = styled.div`
   height: 100%;
   width: 67%;
-  position: sticky;
-  position: -webkit-sticky;
   display: flex;
   flex-direction: column;
   background-color: #E6E6E6;
