@@ -19,6 +19,7 @@ export const SidebarWrapper = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 10;
 
   @media (max-width: 768px) {
     width: 100%;
@@ -29,6 +30,8 @@ export const SidebarWrapper = styled.div`
 export const MainWrapper = styled.div`
   height: 100%;
   width: 67%;
+  position: sticky;
+  position: -webkit-sticky;
   display: flex;
   flex-direction: column;
   background-color: #E6E6E6;

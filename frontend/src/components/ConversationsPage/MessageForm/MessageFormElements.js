@@ -4,6 +4,8 @@ export const MessageFormWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  position: -webkit-sticky;
+  position: sticky;
   background-color: #f8f8f8;
 
   & > form {
@@ -39,7 +41,7 @@ export const MessageFormWrapper = styled.div`
 
       &:hover {
         cursor: pointer;
-        background-color: #43CC47;
+        background-color: #43cc47;
       }
     }
   }

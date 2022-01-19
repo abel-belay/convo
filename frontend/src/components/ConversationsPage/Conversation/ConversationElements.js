@@ -6,6 +6,7 @@ export const ConversationWrapper = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: center;
+  position: sticky;
 `;
 
 export const ContentWrapper = styled.div`
