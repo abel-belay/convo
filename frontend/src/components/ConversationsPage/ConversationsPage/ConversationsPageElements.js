@@ -3,20 +3,22 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
+  position: absolute;
+  top: 0;
   background-color: #e6e6e6;
   font-family: "Inter", sans-serif;
   overflow-y: hidden;
 `;
 
 export const ContentWrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
 `;
 
 export const SidebarWrapper = styled.div`
   width: 33%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   z-index: 10;
@@ -28,7 +30,7 @@ export const SidebarWrapper = styled.div`
 `;
 
 export const MainWrapper = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 67%;
   display: flex;
   flex-direction: column;
