@@ -1,28 +1,13 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import UserContext from "../../../store/userContext.js";
+import { useContext } from "react";
 import { Wrapper } from "./ConversationsListElements";
 import ConversationPreview from "../ConversationPreview";
+import ConversationsContext from "../../../store/conversationsContext.js";
 
 const ConversationsList = () => {
-  const userContext = useContext(UserContext);
-  const user = userContext.user;
-
-  const [conversations, setConversations] = useState(null);
-
-  useEffect(() => {
-    const getConversations = async () => {
-      const res = await axios.get(
-        `/api/users/${user._id}/conversations`
-      );
-      setConversations(res.data);
-    };
-
-    getConversations();
-  }, [user._id]);
+  const conversationsContext = useContext(ConversationsContext);
 
   const loadConverationPreviewComponents = () => {
-    return conversations.map((conversation) => (
+    return conversationsContext.conversations.map((conversation) => (
       <li key={conversation._id}>
         <ConversationPreview conversation={conversation} />
       </li>
@@ -31,7 +16,7 @@ const ConversationsList = () => {
 
   return (
     <Wrapper>
-      {conversations ? (
+      {conversationsContext.conversations ? (
         <ul>{loadConverationPreviewComponents()}</ul>
       ) : (
         "Loading"

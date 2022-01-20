@@ -23,6 +23,7 @@ export const io = new Server(server, {
 
 import userRoutes from "../routes/user-routes.js";
 import conversationRoutes from "../routes/conversation-routes.js";
+import searchRoutes from "../routes/search-routes.js";
 
 const expressLoader = async () => {
   const port = process.env.PORT;
@@ -63,6 +64,8 @@ const expressLoader = async () => {
 
   // EXPRESS ROUTES
   app.use("/api/users/:userId/conversations", conversationRoutes);
+
+  app.use("/api/search", searchRoutes);
 
   app.use("/api/users", userRoutes);
 

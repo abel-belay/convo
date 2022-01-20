@@ -6,14 +6,17 @@ import { UserContextProvider } from "./store/userContext";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { SelectedConversationContextProvider } from "./store/selectedConversationContext";
 import { ShowConversationContextProvider } from "./store/showConversationContext";
+import { ConversationsContextProvider } from "./store/conversationsContext";
 
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
       <ShowConversationContextProvider>
-        <SelectedConversationContextProvider>
-          <App />
-        </SelectedConversationContextProvider>
+        <ConversationsContextProvider>
+          <SelectedConversationContextProvider>
+            <App />
+          </SelectedConversationContextProvider>
+        </ConversationsContextProvider>
       </ShowConversationContextProvider>
     </UserContextProvider>
   </React.StrictMode>,
