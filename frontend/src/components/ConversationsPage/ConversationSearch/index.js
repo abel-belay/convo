@@ -1,18 +1,18 @@
 import axios from "axios";
 import { useContext, useRef, useEffect } from "react";
 import { SearchWrapper } from "./ConversationSearchElements";
-import ConversationsContext from "../../../store/conversationsContext";
+import SearchResultsContext from "../../../store/searchResultsContext";
 import UserContext from "../../../store/userContext";
 
 const ConversationSearch = () => {
-  const conversationsContext = useContext(ConversationsContext);
+  const searchResultsContext = useContext(SearchResultsContext);
   const userContext = useContext(UserContext);
   const timeout = useRef();
 
   useEffect(() => {
     const getConversations = async () => {
       const res = await axios.get(`/api/users/${userContext.user._id}/conversations`);
-      conversationsContext.setConversations(res.data);
+      searchResultsContext.setConversations(res.data);
     };
 
     getConversations();
@@ -28,12 +28,14 @@ const ConversationSearch = () => {
       if (e.target.value.trim()) {
         const config = { params: { searchQuery: e.target.value } };
         const res = await axios.get("/api/search", config);
-        conversationsContext.setConversations(res.data);
+        searchResultsContext.setConversations(res.data.conversations);
+        searchResultsContext.setUsers(res.data.users);
       } else {
         const res = await axios.get(
           `/api/users/${userContext.user._id}/conversations`
         );
-        conversationsContext.setConversations(res.data);
+        searchResultsContext.setConversations(res.data);
+        searchResultsContext.setUsers(null);
       }
     }, 400);
   };

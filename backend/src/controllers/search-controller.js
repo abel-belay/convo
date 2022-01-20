@@ -13,5 +13,8 @@ export const getSearchResults = async (req, res) => {
       select: ["username", "image"],
     },
   });
-  res.send(conversations);
+  const users = await User.find({
+    username: { $regex: "^" + searchQuery },
+  });
+  res.send({conversations, users});
 };
