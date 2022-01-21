@@ -135,6 +135,7 @@ table {
 
 body {
   overflow: hidden;
+  background-color: #EDEDED;
 }
 
 /* SHOW/HIDE CONVERSATIONS LIST ANIMATION */
