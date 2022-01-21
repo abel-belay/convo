@@ -19,8 +19,24 @@ const MessageForm = () => {
 
   const formSubmitHandler = async (e) => {
     e.preventDefault();
-    const conversationId = selectedConversationContext.selectedConversation._id;
     const userId = userContext.user._id;
+
+    let conversationId =
+      selectedConversationContext.selectedConversation._id || null;
+    if (
+      selectedConversationContext.selectedConversation.messages.length === 0
+    ) {
+      const res = await axios.post(
+        `/api/users/${userId}/conversations/new`,
+        {
+          name: "test",
+          users: selectedConversationContext.selectedConversation.users,
+        },
+        { withCredentials: true }
+      );
+      conversationId = res.data.conversation._id;
+    }
+
     const res = await axios.post(
       `/api/users/${userId}/conversations/${conversationId}/messages`,
       { message: textareaRef.current.value },
@@ -32,6 +48,15 @@ const MessageForm = () => {
       // CLEAR TEXTAREA INPUT AND RESIZE TEXTAREA.
       textareaRef.current.value = "";
       inputChangeHandler();
+      if (
+        selectedConversationContext.selectedConversation.messages.length === 0
+      ) {
+        const res = await axios.get(
+          `/api/users/${userId}/conversations/${conversationId}`,
+          { withCredentials: true }
+        );
+        selectedConversationContext.setSelectedConversation(res.data.conversation);
+      }
     }
   };
 

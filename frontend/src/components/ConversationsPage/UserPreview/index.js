@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
 import ShowConversationContext from "../../../store/showConversationContext";
+import UserContext from "../../../store/userContext";
 import {
   Wrapper,
   ContentWrapper,
@@ -11,13 +12,13 @@ import {
 const UserPreview = (props) => {
   const showConversationContext = useContext(ShowConversationContext);
   const selectedConversationContext = useContext(SelectedConversationContext);
-
-  const { user } = props;
+  const userContext = useContext(UserContext);
 
   const previewClickHandler = () => {
     showConversationContext.setShowConversation(true);
     selectedConversationContext.setSelectedConversation({
-      name: user.username,
+      name: props.user.username,
+      users: [props.user, userContext.user],
       messages: [],
       scrollBehavior: "smooth",
     });
@@ -27,14 +28,12 @@ const UserPreview = (props) => {
     <Wrapper onClick={previewClickHandler}>
       <ContentWrapper>
         <img
-          src={
-            "https://images.unsplash.com/photo-1525382455947-f319bc05fb35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1196&q=80"
-          }
+          src={props.user.image}
           alt="User's profile."
         />
         <InnerWrapper>
           <TextWrapper>
-            <h4>{"@" + user.username}</h4>
+            <h4>{"@" + props.user.username}</h4>
             <p>Start a conversation!</p>
           </TextWrapper>
         </InnerWrapper>
