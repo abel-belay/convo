@@ -60,6 +60,7 @@ const ConversationSearch = () => {
   return (
     <SearchWrapper>
       <form action="">
+        <span>&#8981;</span>
         <input
           ref={searchInputRef}
           onChange={inputChangeHandler}
