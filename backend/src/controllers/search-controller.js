@@ -4,7 +4,7 @@ import Conversation from "../models/conversation.js";
 export const getSearchResults = async (req, res) => {
   const { searchQuery } = req.query;
   const conversations = await Conversation.find({
-    user: req.user._id,
+    users: req.user._id,
     name: { $regex: "^" + searchQuery },
   }).populate({
     path: "messages",
@@ -16,5 +16,6 @@ export const getSearchResults = async (req, res) => {
   const users = await User.find({
     username: { $regex: "^" + searchQuery },
   });
+  console.log(conversations);
   res.send({conversations, users});
 };
