@@ -14,8 +14,8 @@ export const getSearchResults = async (req, res) => {
     },
   });
   const users = await User.find({
+    _id: { $ne: req.user._id },
     username: { $regex: "^" + searchQuery },
   });
-  console.log(conversations);
   res.send({conversations, users});
 };
