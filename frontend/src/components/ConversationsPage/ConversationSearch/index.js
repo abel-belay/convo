@@ -1,4 +1,5 @@
 import axios from "axios";
+import socket from "../../../loaders/socket";
 import { useContext, useRef, useEffect } from "react";
 import { SearchWrapper } from "./ConversationSearchElements";
 import SelectedConversationContext from "../../../store/selectedConversationContext";
@@ -33,11 +34,15 @@ const ConversationSearch = () => {
     }
   }, [selectedConversationContext.selectedConversation]);
 
+  socket
+    .off(`new-conversation-${userContext.user._id}`)
+    .on(`new-conversation-${userContext.user._id}`, () => {inputChangeHandler()});
+
   const searchFormSubmitHandler = (e) => {
     e.preventDefault();
-  }
+  };
 
-  const inputChangeHandler = (e) => {
+  const inputChangeHandler = () => {
     // CLEAR THE PREVIOUS TIMEOUT.
     clearTimeout(timeout.current);
 

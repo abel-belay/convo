@@ -62,6 +62,11 @@ export const createConversation = async (req, res) => {
     });
     await conversation.save();
     await conversation.addName(req.user);
+    for (let user of conversation.users) {
+      if (user._id !== req.user._id) {
+        io.emit(`new-conversation-${user._id}`);
+      }
+    }
     res.send({ conversation });
   } catch (e) {
     console.log(e);
