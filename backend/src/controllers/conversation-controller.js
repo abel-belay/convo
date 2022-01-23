@@ -11,6 +11,7 @@ export const getConversation = async (req, res) => {
       select: ["username", "image"],
     },
   });
+  await conversation.addName(req.user);
   res.send({ conversation });
 };
 
@@ -26,6 +27,9 @@ export const showConversations = async (req, res) => {
       },
     },
   });
+  for (let conversation of user.conversations) {
+    await conversation.addName(req.user);
+  }
   res.send(user.conversations);
 };
 
@@ -53,11 +57,11 @@ export const addMessage = async (req, res) => {
 export const createConversation = async (req, res) => {
   try {
     const conversation = new Conversation({
-      name: req.body.name,
       users: req.body.users,
       messages: [],
     });
     await conversation.save();
+    await conversation.addName(req.user);
     res.send({ conversation });
   } catch (e) {
     console.log(e);

@@ -3,9 +3,8 @@ import Conversation from "../models/conversation.js";
 
 export const getSearchResults = async (req, res) => {
   const { searchQuery } = req.query;
-  const conversations = await Conversation.find({
+  let conversations = await Conversation.find({
     users: req.user._id,
-    name: { $regex: "^" + searchQuery },
   }).populate({
     path: "messages",
     populate: {
@@ -13,9 +12,18 @@ export const getSearchResults = async (req, res) => {
       select: ["username", "image"],
     },
   });
+
+  for (let conversation of conversations) {
+    await conversation.addName(req.user);
+  }
+
+  conversations = conversations.filter((conversation) =>
+    conversation.name.startsWith(searchQuery)
+  );
+
   const users = await User.find({
     _id: { $ne: req.user._id },
     username: { $regex: "^" + searchQuery },
   });
-  res.send({conversations, users});
+  res.send({ conversations, users });
 };

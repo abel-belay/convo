@@ -16,8 +16,8 @@ router
   .route("/new")
   .post(passport.authenticate("jwt", { session: false }), createConversation);
 
-router.route("/:conversationId").get(getConversation);
+router.route("/:conversationId").get(passport.authenticate("jwt", { session: false }), getConversation);
 
-router.route("/:conversationId/messages").post(addMessage);
+router.route("/:conversationId/messages").post(passport.authenticate("jwt", { session: false }), addMessage);
 
 export default router;

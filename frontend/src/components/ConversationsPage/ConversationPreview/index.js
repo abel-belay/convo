@@ -25,7 +25,10 @@ const conversationPreviewPic = (messages, user, conversation) => {
         return messages[i].user.image;
       }
     }
-    return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+    const previewImageUser = conversation.users.find((conversationUser) => conversationUser._id !== user._id);
+    console.log(previewImageUser.username);
+    return previewImageUser.image;
+    
   } else {
     return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   }

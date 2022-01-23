@@ -33,6 +33,10 @@ const ConversationSearch = () => {
     }
   }, [selectedConversationContext.selectedConversation]);
 
+  const searchFormSubmitHandler = (e) => {
+    e.preventDefault();
+  }
+
   const inputChangeHandler = (e) => {
     // CLEAR THE PREVIOUS TIMEOUT.
     clearTimeout(timeout.current);
@@ -59,7 +63,7 @@ const ConversationSearch = () => {
 
   return (
     <SearchWrapper>
-      <form action="">
+      <form onSubmit={searchFormSubmitHandler}>
         <span>&#8981;</span>
         <input
           ref={searchInputRef}

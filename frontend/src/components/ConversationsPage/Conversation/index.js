@@ -33,7 +33,7 @@ const Conversation = () => {
   if (selectedConversation) {
     conversationBody = formatConversation(selectedConversation, userContext);
   } else {
-    conversationBody = "Please select a conversation.";
+    conversationBody = "Please select or start a conversation.";
   }
 
   return (
