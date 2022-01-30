@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const MessageFormWrapper = styled.div`
-  width: 100%;
+  width: inherit;
   display: flex;
-  padding-bottom: env(safe-area-inset-bottom);
   justify-content: center;
+  position: fixed;
+  bottom: 0;
   background-color: #f8f8f8;
 
   & > form {

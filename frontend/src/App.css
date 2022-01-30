@@ -134,9 +134,8 @@ table {
 /* END OF CSS RESET */
 
 body {
-  overflow: hidden;
-  background-color: #EDEDED;
-}
+  background-color: #ededed;
+  overflow: hidden;}
 
 /* SHOW/HIDE CONVERSATIONS LIST ANIMATION */
 @media (max-width: 768px) {
