@@ -134,9 +134,7 @@ table {
 /* END OF CSS RESET */
 
 body {
-  position: fixed;
-  background-color: #ededed;
-  overflow: hidden;
+  background-color: #fbfcfb;
 }
 
 /* SHOW/HIDE CONVERSATIONS LIST ANIMATION */

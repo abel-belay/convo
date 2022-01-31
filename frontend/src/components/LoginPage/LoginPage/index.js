@@ -7,8 +7,8 @@ import SignUpPrompt from "../SignUpPrompt";
 
 const LoginPage = () => {
   useEffect(() => {
-    document.body.style.overflow = "auto";
-    document.body.style.position = "static";
+    document.body.style.overflow = "inherit";
+    document.body.style.position = "inherit";
   });
 
   return (

@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const PageWrapper = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   padding-top: 10%;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   background-color: #fbfcfb;
 
   @media (min-width: 500px) {
