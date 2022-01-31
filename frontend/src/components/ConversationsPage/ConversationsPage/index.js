@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { CSSTransition } from "react-transition-group";
 import ShowConversationContext from "../../../store/showConversationContext";
 import {
@@ -17,6 +17,11 @@ import ConversationSearch from "../ConversationSearch";
 const ConversationsPage = () => {
   const showConversationContext = useContext(ShowConversationContext);
   const sidebarRef = useRef();
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+  });
 
   return (
     <PageWrapper>

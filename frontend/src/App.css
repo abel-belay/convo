@@ -136,7 +136,8 @@ table {
 body {
   position: fixed;
   background-color: #ededed;
-  overflow: hidden;}
+  overflow: hidden;
+}
 
 /* SHOW/HIDE CONVERSATIONS LIST ANIMATION */
 @media (max-width: 768px) {
