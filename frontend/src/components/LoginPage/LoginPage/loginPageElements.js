@@ -1,8 +1,11 @@
 import styled from "styled-components";
 
-export const Card = styled.div`
-  width: 50vw;
-  padding: 1rem;
-  background-color: blue;
-  border-radius: 1rem;
-`
+export const PageWrapper = styled.div`
+  width: 100vw;
+  height: 100vh;
+  padding-top: 10%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fbfcfb;
+`;
