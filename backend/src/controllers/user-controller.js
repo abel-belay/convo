@@ -28,7 +28,7 @@ export const loginUser = async (req, res, next) => {
       try {
         const { username, password } = req.body;
         const user = await User.findOne({ username });
-        if (user && bcrypt.compare(password, user.password)) {
+        if (user && await bcrypt.compare(password, user.password)) {
           const jwt = issueJwt(user);
           res.send(JSON.stringify({ jwt, user }));
         } else {

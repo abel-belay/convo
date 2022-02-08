@@ -25,10 +25,10 @@ const conversationPreviewPic = (messages, user, conversation) => {
         return messages[i].user.image;
       }
     }
-    const previewImageUser = conversation.users.find((conversationUser) => conversationUser._id !== user._id);
-    console.log(previewImageUser.username);
+    const previewImageUser = conversation.users.find(
+      (conversationUser) => conversationUser._id !== user._id
+    );
     return previewImageUser.image;
-    
   } else {
     return "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
   }
@@ -47,8 +47,8 @@ const ConversationPreview = (props) => {
 
   let latestMessage = null;
   if (conversation.messages.length > 0) {
-    latestMessage =
-      conversation.messages[conversation.messages.length - 1];
+    latestMessage = conversation.messages[conversation.messages.length - 1];
+    latestMessage.message = latestMessage.message.slice(0, 25) + "...";
     latestMessage.time = dayjs().to(dayjs(latestMessage.timestamp));
   }
 
@@ -92,7 +92,11 @@ const ConversationPreview = (props) => {
     <Wrapper onClick={previewClickHandler} isSelected={isConversationSelected}>
       <ContentWrapper>
         <img
-          src={conversationPreviewPic(conversation.messages, user, conversation)}
+          src={conversationPreviewPic(
+            conversation.messages,
+            user,
+            conversation
+          )}
           alt="User's profile."
         />
         <InnerWrapper>
@@ -102,7 +106,7 @@ const ConversationPreview = (props) => {
                 <h4>{conversation.name}</h4>
                 <p>
                   {latestMessage.user._id === user._id
-                    ? "Sent"
+                    ? "You: " + latestMessage.message
                     : latestMessage.user.username +
                       ": " +
                       latestMessage.message}

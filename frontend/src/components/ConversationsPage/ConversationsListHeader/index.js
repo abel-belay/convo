@@ -6,17 +6,19 @@ import Cookies from "js-cookie";
 
 const ConversationsListHeader = () => {
   const userContext = useContext(UserContext);
-
+  
   const logoutClickHandler = () => {
     Cookies.remove("jwt");
     userContext.setUser(null);
-  }
+  };
 
   return (
     <Header>
       <Avatar src={userContext.user.image}></Avatar>
       <Logo>Convo</Logo>
-      <LogoutLink to='/login' onClick={logoutClickHandler}>Sign Out</LogoutLink>
+      <LogoutLink to="/login" onClick={logoutClickHandler}>
+        Sign Out
+      </LogoutLink>
     </Header>
   );
 };

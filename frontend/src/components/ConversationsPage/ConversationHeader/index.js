@@ -20,7 +20,8 @@ const ConversationHeader = () => {
   return (
     <Header>
       <ContentWrapper>
-        <p onClick={clickHandler}>{body}</p>
+        <span id="back-button" onClick={clickHandler}>{"<"}</span>
+        <span>{body}</span>
       </ContentWrapper>
     </Header>
   );
